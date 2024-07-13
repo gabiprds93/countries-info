@@ -6,7 +6,7 @@ const countryFragment = `
   code
   name
   emoji
-  currency
+  currencies
   continent {
     code
     name
@@ -45,19 +45,21 @@ export const useCountriesByName = (name: string) => {
 export const useCountriesWithFilters = ({
   name,
   continentCode,
+  currency,
 }: {
   name: string
   continentCode: string
+  currency: string
 }) => {
   const query = gql`
-    query ($name: String, $continentCode: String) {
-      countries(filter: { name: { regex: $name }, continent: {regex: $continentCode} }) {
+    query ($name: String, $continentCode: String, $currency: String) {
+      countries(filter: { name: { regex: $name }, continent: {regex: $continentCode}, currency: {regex: $currency}}) {
         ${countryFragment}
       }
     }
   `
 
   return useQuery<ICountriesQuery>(query, {
-    variables: { name, continentCode },
+    variables: { name, continentCode, currency },
   })
 }

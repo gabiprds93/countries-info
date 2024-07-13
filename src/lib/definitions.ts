@@ -12,7 +12,7 @@ interface ICountry {
   code: string
   name: string
   emoji: string
-  currency: string
+  currencies: string[]
   continent: IContinent
   languages: ILanguage[]
   capital?: string
@@ -28,15 +28,22 @@ export interface IContinentsQuery {
 
 interface IFilters {
   continentCode: string
+  currency: string
 }
 
 export interface IStoreFilters {
   filters: IFilters
   changeContinent: (value: string) => void
+  changeCurrency: (value: string) => void
+}
+
+export interface ICurrency {
+  code: string
+  name: string
 }
 
 export interface IFilterProps {
   changeOption: (value: string) => void
-  options?: IContinent[]
+  options?: IContinent[] | ICurrency[]
   optionSelected: string
 }

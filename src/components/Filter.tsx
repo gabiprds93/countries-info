@@ -6,9 +6,7 @@ function Filter({ changeOption, options, optionSelected }: IFilterProps) {
       onChange={(event) => changeOption(event.target.value)}
       value={optionSelected}
     >
-      <option value="" disabled>
-        Seleccionar
-      </option>
+      <option value="">Seleccionar</option>
 
       {options?.map((option) => {
         return (

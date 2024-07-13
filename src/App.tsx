@@ -1,20 +1,22 @@
 import { ChangeEventHandler, useEffect, useState } from "react"
 
 import Filter from "./components/Filter"
-import { useCountriesWithFilters } from "./hooks/countries"
+import { useCountries, useCountriesWithFilters } from "./hooks/countries"
 import { useContinents } from "./hooks/useContinents"
 import { useFilters } from "./hooks/useFilters"
-import { ICountriesQuery } from "./lib/definitions"
+import { ICurrency } from "./lib/definitions"
 
 function App() {
   const [countryToSearch, setCountryToSearch] = useState("")
-  const [countriesToShow, setCountriesToShow] = useState<ICountriesQuery>()
+  const [currenciesList, setCurrenciesList] = useState<ICurrency[]>()
 
-  const { changeContinent, filters } = useFilters()
+  const { changeContinent, changeCurrency, filters } = useFilters()
   const { data: continentsData } = useContinents()
+  const { data: countriesData } = useCountries()
   const { data: countriesSearched } = useCountriesWithFilters({
     name: countryToSearch,
     continentCode: filters.continentCode,
+    currency: filters.currency,
   })
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
@@ -25,8 +27,24 @@ function App() {
   }
 
   useEffect(() => {
-    setCountriesToShow(countriesSearched)
-  }, [countriesSearched])
+    let allCurrencies: string[] = []
+    countriesData?.countries.forEach((country) => {
+      allCurrencies = country.currencies.concat(allCurrencies)
+    })
+
+    const singleCurrencies = new Set(allCurrencies)
+    const currenciesArray = [...singleCurrencies]
+    const formatedCurrencies = currenciesArray
+      .filter((currency) => currency)
+      .map((currency) => {
+        return {
+          code: currency,
+          name: currency,
+        }
+      })
+
+    setCurrenciesList(formatedCurrencies)
+  }, [countriesData])
 
   return (
     <main>
@@ -43,8 +61,14 @@ function App() {
         optionSelected={filters.continentCode}
       />
 
+      <Filter
+        changeOption={changeCurrency}
+        options={currenciesList}
+        optionSelected={filters.currency}
+      />
+
       <ul>
-        {countriesToShow?.countries.map((country) => {
+        {countriesSearched?.countries.map((country) => {
           return (
             <li key={country.code}>{`${country.emoji} ${country.name}`}</li>
           )
