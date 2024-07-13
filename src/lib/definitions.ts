@@ -29,12 +29,14 @@ export interface IContinentsQuery {
 interface IFilters {
   continentCode: string
   currency: string
+  countryName: string
 }
 
 export interface IStoreFilters {
   filters: IFilters
   changeContinent: (value: string) => void
   changeCurrency: (value: string) => void
+  changeCountry: (value: string) => void
 }
 
 export interface ICurrency {

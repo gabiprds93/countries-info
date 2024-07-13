@@ -7,14 +7,14 @@ import { useFilters } from "./hooks/useFilters"
 import { ICurrency } from "./lib/definitions"
 
 function App() {
-  const [countryToSearch, setCountryToSearch] = useState("")
   const [currenciesList, setCurrenciesList] = useState<ICurrency[]>()
 
-  const { changeContinent, changeCurrency, filters } = useFilters()
+  const { changeContinent, changeCurrency, changeCountry, filters } =
+    useFilters()
   const { data: continentsData } = useContinents()
   const { data: countriesData } = useCountries()
   const { data: countriesSearched } = useCountriesWithFilters({
-    name: countryToSearch,
+    countryName: filters.countryName,
     continentCode: filters.continentCode,
     currency: filters.currency,
   })
@@ -23,7 +23,7 @@ function App() {
     const { value } = target
     const formatedValue = value.charAt(0).toUpperCase() + value.slice(1)
 
-    setCountryToSearch(formatedValue)
+    changeCountry(formatedValue)
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function App() {
         onChange={handleSearch}
         placeholder="Escribir nombre del país"
         type="text"
-        value={countryToSearch}
+        value={filters.countryName}
       />
 
       <Filter
