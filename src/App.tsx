@@ -1,10 +1,21 @@
-import { ChangeEventHandler, useState } from "react"
+import { ChangeEventHandler, useEffect, useState } from "react"
 
-import { useCountriesByName } from "./hooks/countries"
+import Filter from "./components/Filter"
+import { useCountriesWithFilters } from "./hooks/countries"
+import { useContinents } from "./hooks/useContinents"
+import { useFilters } from "./hooks/useFilters"
+import { ICountriesQuery } from "./lib/definitions"
 
 function App() {
   const [countryToSearch, setCountryToSearch] = useState("")
-  const { data: countriesSearched } = useCountriesByName(countryToSearch)
+  const [countriesToShow, setCountriesToShow] = useState<ICountriesQuery>()
+
+  const { changeContinent, filters } = useFilters()
+  const { data: continentsData } = useContinents()
+  const { data: countriesSearched } = useCountriesWithFilters({
+    name: countryToSearch,
+    continentCode: filters.continentCode,
+  })
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { value } = target
@@ -12,6 +23,10 @@ function App() {
 
     setCountryToSearch(formatedValue)
   }
+
+  useEffect(() => {
+    setCountriesToShow(countriesSearched)
+  }, [countriesSearched])
 
   return (
     <main>
@@ -22,8 +37,14 @@ function App() {
         value={countryToSearch}
       />
 
+      <Filter
+        changeOption={changeContinent}
+        options={continentsData?.continents}
+        optionSelected={filters.continentCode}
+      />
+
       <ul>
-        {countriesSearched?.countries.map((country) => {
+        {countriesToShow?.countries.map((country) => {
           return (
             <li key={country.code}>{`${country.emoji} ${country.name}`}</li>
           )

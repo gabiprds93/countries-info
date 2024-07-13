@@ -21,3 +21,22 @@ interface ICountry {
 export interface ICountriesQuery {
   countries: ICountry[]
 }
+
+export interface IContinentsQuery {
+  continents: IContinent[]
+}
+
+interface IFilters {
+  continentCode: string
+}
+
+export interface IStoreFilters {
+  filters: IFilters
+  changeContinent: (value: string) => void
+}
+
+export interface IFilterProps {
+  changeOption: (value: string) => void
+  options?: IContinent[]
+  optionSelected: string
+}

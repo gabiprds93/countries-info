@@ -41,3 +41,23 @@ export const useCountriesByName = (name: string) => {
 
   return useQuery<ICountriesQuery>(query, { variables: { name } })
 }
+
+export const useCountriesWithFilters = ({
+  name,
+  continentCode,
+}: {
+  name: string
+  continentCode: string
+}) => {
+  const query = gql`
+    query ($name: String, $continentCode: String) {
+      countries(filter: { name: { regex: $name }, continent: {regex: $continentCode} }) {
+        ${countryFragment}
+      }
+    }
+  `
+
+  return useQuery<ICountriesQuery>(query, {
+    variables: { name, continentCode },
+  })
+}
