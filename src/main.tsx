@@ -1,8 +1,16 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 
 import App from "./App"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+])
 
 const client = new ApolloClient({
   uri: "https://countries.trevorblades.com/",
@@ -12,7 +20,7 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <RouterProvider router={router} />
     </ApolloProvider>
   </React.StrictMode>
 )
