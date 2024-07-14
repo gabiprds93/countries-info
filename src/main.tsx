@@ -19,7 +19,25 @@ const router = createBrowserRouter([
 
 const client = new ApolloClient({
   uri: "https://countries.trevorblades.com/",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          country: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: "Country",
+                code: args?.code,
+              })
+            },
+          },
+        },
+      },
+      Country: {
+        keyFields: ["code"],
+      },
+    },
+  }),
 })
 
 createRoot(document.getElementById("root")!).render(
