@@ -1,5 +1,6 @@
-import { ChangeEventHandler, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
+import SearchCountry from "../components/SearchCountry"
 import Filter from "../components/Filter"
 import CountriesList from "../components/CountriesList"
 import { useCountries } from "../hooks/countries"
@@ -10,17 +11,9 @@ import { ICurrency } from "../lib/definitions"
 function HomePage() {
   const [currenciesList, setCurrenciesList] = useState<ICurrency[]>()
 
-  const { changeContinent, changeCurrency, changeCountry, filters } =
-    useFilters()
+  const { changeContinent, changeCurrency, filters } = useFilters()
   const { data: continentsData } = useContinents()
   const { data: countriesData } = useCountries()
-
-  const handleSearch: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
-    const { value } = target
-    const formatedValue = value.charAt(0).toUpperCase() + value.slice(1)
-
-    changeCountry(formatedValue)
-  }
 
   useEffect(() => {
     let allCurrencies: string[] = []
@@ -44,12 +37,7 @@ function HomePage() {
 
   return (
     <main>
-      <input
-        onChange={handleSearch}
-        placeholder="Escribir nombre del país"
-        type="text"
-        value={filters.countryName}
-      />
+      <SearchCountry />
 
       <Filter
         changeOption={changeContinent}
