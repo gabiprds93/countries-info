@@ -53,3 +53,7 @@ export interface IFilterProps {
   options?: IContinent[] | ICurrency[]
   optionSelected: string
 }
+
+export interface IFiltersSectionProps {
+  currencies: ICurrency[]
+}
