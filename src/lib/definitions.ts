@@ -22,6 +22,10 @@ export interface ICountriesQuery {
   countries: ICountry[]
 }
 
+export interface ICountryQuery {
+  country: ICountry
+}
+
 export interface IContinentsQuery {
   continents: IContinent[]
 }

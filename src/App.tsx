@@ -1,7 +1,8 @@
 import { ChangeEventHandler, useEffect, useState } from "react"
 
 import Filter from "./components/Filter"
-import { useCountries, useCountriesWithFilters } from "./hooks/countries"
+import CountriesList from "./components/CountriesList"
+import { useCountries } from "./hooks/countries"
 import { useContinents } from "./hooks/useContinents"
 import { useFilters } from "./hooks/useFilters"
 import { ICurrency } from "./lib/definitions"
@@ -13,11 +14,6 @@ function App() {
     useFilters()
   const { data: continentsData } = useContinents()
   const { data: countriesData } = useCountries()
-  const { data: countriesSearched } = useCountriesWithFilters({
-    countryName: filters.countryName,
-    continentCode: filters.continentCode,
-    currency: filters.currency,
-  })
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { value } = target
@@ -67,13 +63,7 @@ function App() {
         optionSelected={filters.currency}
       />
 
-      <ul>
-        {countriesSearched?.countries.map((country) => {
-          return (
-            <li key={country.code}>{`${country.emoji} ${country.name}`}</li>
-          )
-        })}
-      </ul>
+      <CountriesList />
     </main>
   )
 }
