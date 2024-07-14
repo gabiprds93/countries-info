@@ -1,21 +1,26 @@
+import { Select } from "antd"
+
 import { IFilterProps } from "../lib/definitions"
 
 function Filter({ changeOption, options, optionSelected }: IFilterProps) {
-  return (
-    <select
-      onChange={(event) => changeOption(event.target.value)}
-      value={optionSelected}
-    >
-      <option value="">Seleccionar</option>
+  const formatOptions = () => {
+    const selectedOption = [{ value: "", label: "Seleccionar opción" }]
+    const formatedOptions = options?.map((option) => {
+      return { value: option.code, label: option.name }
+    })
 
-      {options?.map((option) => {
-        return (
-          <option key={option.code} value={option.code}>
-            {option.name}
-          </option>
-        )
-      })}
-    </select>
+    return selectedOption.concat(formatedOptions ?? [])
+  }
+
+  return (
+    <Select
+      onChange={(value) => changeOption(value)}
+      optionFilterProp="label"
+      options={formatOptions()}
+      showSearch
+      style={{ width: 200 }}
+      value={optionSelected}
+    />
   )
 }
 
