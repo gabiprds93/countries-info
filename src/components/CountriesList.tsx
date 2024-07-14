@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { List, Typography } from "antd"
+import { List } from "antd"
 
 import { useCountriesWithFilters } from "../hooks/countries"
 import { useFilters } from "../hooks/useFilters"
@@ -14,8 +14,6 @@ function CountriesList() {
 
   return (
     <section>
-      <Typography.Title>Listado de Países</Typography.Title>
-
       <List
         bordered
         dataSource={countriesSearched?.countries}

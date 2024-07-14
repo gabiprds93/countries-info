@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { Descriptions, List, Typography } from "antd"
 
 import { useCountry } from "../hooks/useCountry"
+import styles from "../styles/Layout.module.css"
 
 function CountryPage() {
   const params = useParams()
@@ -54,7 +55,7 @@ function CountryPage() {
   ]
 
   return (
-    <main>
+    <main className={styles.main}>
       <Typography.Title>
         {emoji} {name}
       </Typography.Title>

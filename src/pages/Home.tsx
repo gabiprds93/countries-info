@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { Flex, Typography } from "antd"
 
 import FiltersSection from "../components/FiltersSection"
 import CountriesList from "../components/CountriesList"
 import { useCountries } from "../hooks/countries"
 import { ICurrency } from "../lib/definitions"
+import styles from "../styles/Layout.module.css"
 
 function HomePage() {
   const [currenciesList, setCurrenciesList] = useState<ICurrency[]>([])
@@ -30,10 +32,14 @@ function HomePage() {
   }, [countriesData])
 
   return (
-    <main>
-      <FiltersSection currencies={currenciesList} />
+    <main className={styles.main}>
+      <Typography.Title>Listado de Países</Typography.Title>
 
-      <CountriesList />
+      <Flex gap="large" vertical>
+        <FiltersSection currencies={currenciesList} />
+
+        <CountriesList />
+      </Flex>
     </main>
   )
 }
