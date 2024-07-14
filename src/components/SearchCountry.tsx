@@ -1,12 +1,12 @@
-import { ChangeEventHandler, useCallback, useState } from "react"
-import { Input } from "antd"
+import { ChangeEventHandler, useCallback, useEffect, useState } from "react"
+import { Flex, Input, Typography } from "antd"
 import debounce from "just-debounce-it"
 
 import { useFilters } from "../hooks/useFilters"
 
 function SearchCountry() {
   const [countryName, setCountryName] = useState("")
-  const { changeCountry } = useFilters()
+  const { changeCountry, filters } = useFilters()
 
   const debounceSearchCountry = useCallback(
     debounce((search: string) => {
@@ -28,12 +28,22 @@ function SearchCountry() {
     debounceSearchCountry(value)
   }
 
+  useEffect(() => {
+    if (filters.countryName) {
+      setCountryName(filters.countryName)
+    }
+  }, [filters.countryName])
+
   return (
-    <Input
-      onChange={handleSearch}
-      placeholder="Buscar por país"
-      value={countryName}
-    />
+    <Flex gap="small" vertical>
+      <Typography.Text>Buscar por país</Typography.Text>
+
+      <Input
+        onChange={handleSearch}
+        placeholder="Escribir país"
+        value={countryName}
+      />
+    </Flex>
   )
 }
 
