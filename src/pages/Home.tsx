@@ -1,13 +1,13 @@
 import { ChangeEventHandler, useEffect, useState } from "react"
 
-import Filter from "./components/Filter"
-import CountriesList from "./components/CountriesList"
-import { useCountries } from "./hooks/countries"
-import { useContinents } from "./hooks/useContinents"
-import { useFilters } from "./hooks/useFilters"
-import { ICurrency } from "./lib/definitions"
+import Filter from "../components/Filter"
+import CountriesList from "../components/CountriesList"
+import { useCountries } from "../hooks/countries"
+import { useContinents } from "../hooks/useContinents"
+import { useFilters } from "../hooks/useFilters"
+import { ICurrency } from "../lib/definitions"
 
-function App() {
+function HomePage() {
   const [currenciesList, setCurrenciesList] = useState<ICurrency[]>()
 
   const { changeContinent, changeCurrency, changeCountry, filters } =
@@ -68,4 +68,4 @@ function App() {
   )
 }
 
-export default App
+export default HomePage

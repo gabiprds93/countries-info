@@ -3,13 +3,13 @@ import { createRoot } from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 
-import App from "./App"
+import HomePage from "./pages/Home"
 import CountryPage from "./pages/Country"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
   },
   {
     path: "country/:countryCode",
