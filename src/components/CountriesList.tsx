@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { List, Typography } from "antd"
 
 import { useCountriesWithFilters } from "../hooks/countries"
 import { useFilters } from "../hooks/useFilters"
@@ -13,19 +14,19 @@ function CountriesList() {
 
   return (
     <section>
-      <h1>Países</h1>
+      <Typography.Title>Listado de Países</Typography.Title>
 
-      <ul>
-        {countriesSearched?.countries.map((country) => {
-          return (
-            <li key={country.code}>
-              <Link to={`country/${country.code}`}>
-                {`${country.emoji} ${country.name}`}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <List
+        bordered
+        dataSource={countriesSearched?.countries}
+        renderItem={(item) => (
+          <List.Item>
+            <Link to={`country/${item.code}`}>
+              {`${item.emoji} ${item.name}`}
+            </Link>
+          </List.Item>
+        )}
+      />
     </section>
   )
 }
