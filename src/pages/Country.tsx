@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import { Descriptions, List, Typography } from "antd"
 
 import { useCountry } from "../hooks/useCountry"
 
@@ -9,37 +10,56 @@ function CountryPage() {
   const { emoji, name, code, currencies, continent, languages, capital } =
     data?.country ?? {}
 
+  const items = [
+    {
+      key: "1",
+      label: "Código",
+      children: code,
+    },
+    {
+      key: "2",
+      label: "Nombre",
+      children: name,
+    },
+    {
+      key: "3",
+      label: "Monedas",
+      children: (
+        <List
+          dataSource={currencies}
+          renderItem={(currency) => <List.Item>{currency}</List.Item>}
+        />
+      ),
+    },
+    {
+      key: "4",
+      label: "Continente",
+      children: continent?.name,
+    },
+    {
+      key: "5",
+      label: "Idiomas",
+      children: (
+        <List
+          dataSource={languages}
+          renderItem={(language) => <List.Item>{language.name}</List.Item>}
+        />
+      ),
+    },
+    {
+      key: "6",
+      label: "Capital",
+      children: capital,
+    },
+  ]
+
   return (
     <main>
-      <h1>
+      <Typography.Title>
         {emoji} {name}
-      </h1>
+      </Typography.Title>
 
-      <p>Código: {code}</p>
-
-      <p>
-        <span>Monedas:</span>
-
-        <ul>
-          {currencies?.map((currency) => {
-            return <li key={currency}>{currency}</li>
-          })}
-        </ul>
-      </p>
-
-      <p>Continente: {continent?.name}</p>
-
-      <p>
-        <span>Idiomas:</span>
-
-        <ul>
-          {languages?.map((language) => {
-            return <li key={language.code}>{language.name}</li>
-          })}
-        </ul>
-      </p>
-
-      <p>Capital: {capital}</p>
+      <Descriptions bordered items={items} title="Información del país" />
     </main>
   )
 }
