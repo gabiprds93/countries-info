@@ -14,6 +14,6 @@ test("Renders Country page", () => {
     </MockedProvider>
   )
 
-  const textElement = screen.getByText("Información del país")
+  const textElement = screen.getByText("Volver")
   expect(textElement).toBeTruthy()
 })
