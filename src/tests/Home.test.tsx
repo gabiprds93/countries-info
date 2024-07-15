@@ -6,10 +6,15 @@ import { MemoryRouter } from "react-router-dom"
 
 import HomePage from "../pages/Home"
 import { useCountriesWithFilters } from "../hooks/useCountriesWithFilters"
-import { mockCountriesData, mockPeruData } from "./mocks"
+import { useCurrencies } from "../hooks/useCurrencies"
+import { mockCountriesData, mockCurrenciesData, mockPeruData } from "./mocks"
 
 vi.mock("../hooks/useCountriesWithFilters", () => ({
   useCountriesWithFilters: vi.fn(),
+}))
+
+vi.mock("../hooks/useCurrencies", () => ({
+  useCurrencies: vi.fn(),
 }))
 
 beforeEach(() => {
@@ -19,6 +24,7 @@ beforeEach(() => {
 
 test("Renders Home page", () => {
   useCountriesWithFilters.mockReturnValue(mockCountriesData)
+  useCurrencies.mockReturnValue(mockCurrenciesData)
 
   render(
     <MockedProvider addTypename={false}>
@@ -34,6 +40,8 @@ test("Renders Home page", () => {
 
 test("Input works as expected", async () => {
   useCountriesWithFilters.mockReturnValue(mockCountriesData)
+  useCurrencies.mockReturnValue(mockCurrenciesData)
+
   const user = userEvent.setup()
   render(
     <MockedProvider addTypename={false}>
