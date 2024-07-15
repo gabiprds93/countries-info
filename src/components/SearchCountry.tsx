@@ -36,9 +36,12 @@ function SearchCountry() {
 
   return (
     <Flex gap="small" vertical>
-      <Typography.Text>Buscar por país</Typography.Text>
+      <label htmlFor="countryName">
+        <Typography.Text>Buscar por país</Typography.Text>
+      </label>
 
       <Input
+        id="countryName"
         onChange={handleSearch}
         placeholder="Escribir país"
         value={countryName}
