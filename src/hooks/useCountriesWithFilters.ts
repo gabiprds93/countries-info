@@ -1,22 +1,7 @@
 import { gql, useQuery } from "@apollo/client"
 
 import { ICountriesQuery, IFilters } from "../lib/definitions"
-
-const countryFragment = `
-  code
-  name
-  emoji
-  currencies
-  continent {
-    code
-    name
-  }
-  languages {
-    code
-    name
-  }
-  capital
-`
+import { COUNTRY_FRAGMENT } from "../lib/constants"
 
 export function useCountriesWithFilters({
   countryName,
@@ -30,7 +15,7 @@ export function useCountriesWithFilters({
         continent: {regex: $continentCode},
         currency: {regex: $currency}
       }) {
-        ${countryFragment}
+        ${COUNTRY_FRAGMENT}
       }
     }
   `
