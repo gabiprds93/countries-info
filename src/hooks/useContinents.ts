@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client"
 
 import { IContinentsQuery } from "../lib/definitions"
 
-export const useContinents = () => {
+export function useContinents() {
   const query = gql`
     query {
       continents {
