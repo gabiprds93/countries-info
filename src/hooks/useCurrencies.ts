@@ -6,25 +6,23 @@ export function useCurrencies(countriesSearched?: ICountriesQuery) {
   const [currenciesList, setCurrenciesList] = useState<ICurrency[]>([])
 
   useEffect(() => {
-    if (!currenciesList.length) {
-      let allCurrencies: string[] = []
-      countriesSearched?.countries.forEach((country) => {
-        allCurrencies = country.currencies.concat(allCurrencies)
+    let allCurrencies: string[] = []
+    countriesSearched?.countries.forEach((country) => {
+      allCurrencies = country.currencies.concat(allCurrencies)
+    })
+
+    const singleCurrencies = new Set(allCurrencies)
+    const currenciesArray = [...singleCurrencies]
+    const formatedCurrencies = currenciesArray
+      .filter((currency) => currency)
+      .map((currency) => {
+        return {
+          code: currency,
+          name: currency,
+        }
       })
 
-      const singleCurrencies = new Set(allCurrencies)
-      const currenciesArray = [...singleCurrencies]
-      const formatedCurrencies = currenciesArray
-        .filter((currency) => currency)
-        .map((currency) => {
-          return {
-            code: currency,
-            name: currency,
-          }
-        })
-
-      setCurrenciesList(formatedCurrencies)
-    }
+    setCurrenciesList(formatedCurrencies)
   }, [countriesSearched, currenciesList])
 
   return { currenciesList }
