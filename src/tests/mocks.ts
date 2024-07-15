@@ -29,3 +29,10 @@ export const mockPeruData = {
     ],
   },
 }
+
+export const mockCurrenciesData = [
+  {
+    code: "PEN",
+    name: "PEN",
+  },
+]
