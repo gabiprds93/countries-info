@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Descriptions, List, Typography } from "antd"
 
 import { useCountry } from "../hooks/useCountry"
+import ArrowLeft from "../icons/ArrowLeft"
 import styles from "../styles/Layout.module.css"
 
 function CountryPage() {
@@ -56,6 +57,22 @@ function CountryPage() {
 
   return (
     <main className={styles.main}>
+      <Link
+        to="/"
+        style={{
+          alignItems: "center",
+          color: "rgba(0, 0, 0, 0.45)",
+          display: "flex",
+          textDecoration: "none",
+        }}
+      >
+        <ArrowLeft />
+
+        <Typography.Text type="secondary" style={{ fontSize: 16 }}>
+          Volver
+        </Typography.Text>
+      </Link>
+
       <Typography.Title>
         {emoji} {name}
       </Typography.Title>
