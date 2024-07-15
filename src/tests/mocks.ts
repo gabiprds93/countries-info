@@ -13,3 +13,19 @@ export const mockCountriesData = {
     ],
   },
 }
+
+export const mockPeruData = {
+  data: {
+    countries: [
+      {
+        code: "PE",
+        name: "Peru",
+        emoji: "🇵🇪",
+        currencies: ["PEN"],
+        continent: { code: "SA", name: "South America" },
+        languages: [{ code: "es", name: "Spanish" }],
+        capital: "Lima",
+      },
+    ],
+  },
+}
