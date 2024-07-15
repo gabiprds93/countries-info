@@ -1,30 +1,23 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains a small web application that displays country information using https://countries.trevorblades.com as API.
 
-Currently, two official plugins are available:
+The stack used is: React, Typescript and Graphql.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This app has two urls:
+1. List of countries. This page has:
+   - A search bar
+   - Filter by continent
+   - Filter by currency
 
-## Expanding the ESLint configuration
+2. Detail of a country: when you click on a country the web redirects you to a view containing the following detailed information of the country:
+   - code
+   - name
+   - currency
+   - continent
+   - languages
+   - capital
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Other technologies used are: Zustand, Ant Design, Apollo Client, React Router Dom, Just Bounce It
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+For testing purposes it was used: Vitest, Testing Library
