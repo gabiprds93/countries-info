@@ -1,3 +1,5 @@
+import { ICurrency } from "../lib/definitions"
+
 export const mockCountriesData = {
   data: {
     countries: [
@@ -30,9 +32,13 @@ export const mockPeruData = {
   },
 }
 
-export const mockCurrenciesData = [
-  {
-    code: "PEN",
-    name: "PEN",
-  },
-]
+export const mockCurrenciesData: {
+  currenciesList: ICurrency[]
+} = {
+  currenciesList: [
+    {
+      code: "PEN",
+      name: "PEN",
+    },
+  ],
+}

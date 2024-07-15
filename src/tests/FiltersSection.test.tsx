@@ -8,7 +8,7 @@ import { mockCurrenciesData } from "./mocks"
 test("Renders FiltersSection component", () => {
   render(
     <MockedProvider addTypename={false}>
-      <FiltersSection currencies={mockCurrenciesData} />
+      <FiltersSection currencies={mockCurrenciesData.currenciesList} />
     </MockedProvider>
   )
   const textElement = screen.getByText("Filtrar por Continente")
