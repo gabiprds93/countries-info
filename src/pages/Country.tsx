@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { Descriptions, List, Typography } from "antd"
+import { Descriptions, List, Skeleton, Typography } from "antd"
 
 import { useCountry } from "../hooks/useCountry"
 import ArrowLeft from "../icons/ArrowLeft"
@@ -7,7 +7,7 @@ import styles from "../styles/Layout.module.css"
 
 function CountryPage() {
   const params = useParams()
-  const { data } = useCountry(params.countryCode ?? "")
+  const { data, loading } = useCountry(params.countryCode ?? "")
 
   const { emoji, name, code, currencies, continent, languages, capital } =
     data?.country ?? {}
@@ -73,11 +73,17 @@ function CountryPage() {
         </Typography.Text>
       </Link>
 
-      <Typography.Title>
-        {emoji} {name}
-      </Typography.Title>
+      {loading ? (
+        <Skeleton active />
+      ) : (
+        <>
+          <Typography.Title>
+            {emoji} {name}
+          </Typography.Title>
 
-      <Descriptions bordered items={items} title="Información del país" />
+          <Descriptions bordered items={items} title="Información del país" />
+        </>
+      )}
     </main>
   )
 }
