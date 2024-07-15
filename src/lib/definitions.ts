@@ -8,7 +8,7 @@ interface ILanguage {
   name: string
 }
 
-interface ICountry {
+export interface ICountry {
   code: string
   name: string
   emoji: string
