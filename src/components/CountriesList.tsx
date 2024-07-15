@@ -1,22 +1,14 @@
 import { Link } from "react-router-dom"
 import { List } from "antd"
 
-import { useCountriesWithFilters } from "../hooks/countries"
-import { useFilters } from "../hooks/useFilters"
+import { ICountriesListProps } from "../lib/definitions"
 
-function CountriesList() {
-  const { filters } = useFilters()
-  const { data: countriesSearched } = useCountriesWithFilters({
-    countryName: filters.countryName,
-    continentCode: filters.continentCode,
-    currency: filters.currency,
-  })
-
+function CountriesList({ countries }: ICountriesListProps) {
   return (
     <section>
       <List
         bordered
-        dataSource={countriesSearched?.countries}
+        dataSource={countries}
         renderItem={(item) => (
           <List.Item>
             <Link to={`country/${item.code}`}>

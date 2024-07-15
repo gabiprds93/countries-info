@@ -30,7 +30,7 @@ export interface IContinentsQuery {
   continents: IContinent[]
 }
 
-interface IFilters {
+export interface IFilters {
   continentCode: string
   currency: string
   countryName: string
@@ -56,4 +56,8 @@ export interface IFilterProps {
 
 export interface IFiltersSectionProps {
   currencies: ICurrency[]
+}
+
+export interface ICountriesListProps {
+  countries?: ICountry[]
 }

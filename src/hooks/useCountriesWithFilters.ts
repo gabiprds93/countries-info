@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client"
 
-import { ICountriesQuery } from "../lib/definitions"
+import { ICountriesQuery, IFilters } from "../lib/definitions"
 
 const countryFragment = `
   code
@@ -18,27 +18,11 @@ const countryFragment = `
   capital
 `
 
-export const useCountries = () => {
-  const query = gql`
-    query {
-      countries {
-        ${countryFragment}
-      }
-    }
-  `
-
-  return useQuery<ICountriesQuery>(query)
-}
-
-export const useCountriesWithFilters = ({
+export function useCountriesWithFilters({
   countryName,
   continentCode,
   currency,
-}: {
-  countryName: string
-  continentCode: string
-  currency: string
-}) => {
+}: IFilters) {
   const query = gql`
     query ($countryName: String, $continentCode: String, $currency: String) {
       countries(filter: {
